@@ -1,0 +1,4 @@
+build/
+*.stl
+__pycache__/
+*.blend1
