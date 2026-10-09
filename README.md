@@ -1,5 +1,11 @@
 # screw_it
 
+[![License](https://img.shields.io/github/license/busyDuckman/screw_it)](LICENSE)
+[![Last commit](https://img.shields.io/github/last-commit/busyDuckman/screw_it)](https://github.com/busyDuckman/screw_it/commits)
+[![Stars](https://img.shields.io/github/stars/busyDuckman/screw_it?style=flat)](https://github.com/busyDuckman/screw_it/stargazers)
+[![OpenSCAD](https://img.shields.io/badge/OpenSCAD-library-F9D72C)](https://openscad.org)
+[![Requires BOSL2](https://img.shields.io/badge/requires-BOSL2-orange)](https://github.com/BelfrySCAD/BOSL2)
+
 An [OpenSCAD](https://openscad.org) library for self tapping screw holes in 3D prints, built on [BOSL2](https://github.com/BelfrySCAD/BOSL2).   
 It's about making better screw holes (in my opinion anyway).
 
