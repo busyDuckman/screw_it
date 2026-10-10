@@ -255,9 +255,16 @@ module self_tap_hole(gauge=undef,
     shank_dia = params[0];
     thread_dia = params[1];
     head_dia = params[2] + dilate_head;
-    head_h = params[3];
     pilot_dia = params[4];
     sink = is_undef(sink) ? 0 : sink;
+
+    // _head() only draws countersunk, flat and socket heads. With no head
+    // there is no head height, and the shaft has to reach the surface itself.
+    no_head = !has_flag(screw_type, SCREW_HEAD_COUNTERSUNK) &&
+              !has_flag(screw_type, SCREW_HEAD_FLAT) &&
+              !has_flag(screw_type, SCREW_HEAD_SOCKET);
+    head_h = no_head ? 0 : params[3];
+    shaft_h = length + (no_head ? sink : 0);
 
     hole_fn = is_undef($fn) ? _auto_fn(max(shank_dia, head_dia), 0.5) : $fn;
 
@@ -272,9 +279,9 @@ module self_tap_hole(gauge=undef,
         union() {
             //cyl(d=pilot_dia, h=length, anchor=TOP, $fn=hole_fn);
             //rotate([0, 180, 0])
-            twist = has_flag(hole_type, _HOLE_TWIST) ? 180: 0;
+            twist = has_flag(hole_type, _HOLE_TWIST) ? 180 * shaft_h / length : 0;
             down(length)
-            linear_extrude(height = length, twist=twist)
+            linear_extrude(height = shaft_h, twist=twist)
                 _hole_shape_2d(hole_type, shank_dia, thread_dia, pilot_dia, $fn=hole_fn);
             _head(head_dia, head_h, screw_type, sink=sink, $fn=hole_fn);
         }
